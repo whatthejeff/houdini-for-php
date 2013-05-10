@@ -6,7 +6,9 @@ php:
   - 5.5
 
 before_script:
-  - phpize && ./configure && make && sudo make install
-  - echo "extension=houdini.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - phpize && ./configure --enable-houdini && make
+  - sed -i 's/save_or_mail_results();/\/\/save_or_mail_results();/g' run-tests.php
+  - sed -i 's/-@if test ! -z/@if test ! -z/g' Makefile
+  - sed -i 's/rm $(top_builddir)\/tmp-php.ini;//g' Makefile
 
-script: phpunit tests
+script: REPORT_EXIT_STATUS=1 make test
