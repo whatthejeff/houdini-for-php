@@ -22,7 +22,6 @@ Houdini for PHP works with PHP 5.2 or later.
 ## Functions
 
 ```php
-
 /**
  * Escape an HTML string
  *
@@ -32,7 +31,7 @@ Houdini for PHP works with PHP 5.2 or later.
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_escape_html($string, $secure = true)
+houdini_escape_html($string, $secure = true);
 
 /**
  * Unescape an HTML string
@@ -42,7 +41,7 @@ houdini_escape_html($string, $secure = true)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_unescape_html($string)
+houdini_unescape_html($string);
 
 /**
  * Escape a JavaScript string
@@ -52,7 +51,7 @@ houdini_unescape_html($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_escape_js($string)
+houdini_escape_js($string);
 
 /**
  * Unescape JavaScript string
@@ -62,7 +61,7 @@ houdini_escape_js($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_unescape_js($string)
+houdini_unescape_js($string);
 
 /**
  * Escape a URI string
@@ -72,7 +71,7 @@ houdini_unescape_js($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_escape_uri($string)
+houdini_escape_uri($string);
 
 /**
  * Unescape a URI string
@@ -82,7 +81,7 @@ houdini_escape_uri($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_unescape_uri($string)
+houdini_unescape_uri($string);
 
 /**
  * Escape a URL string
@@ -92,7 +91,7 @@ houdini_unescape_uri($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_escape_url($string)
+houdini_escape_url($string);
 
 /**
  * Unescape a URL string
@@ -102,7 +101,7 @@ houdini_escape_url($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_unescape_url($string)
+houdini_unescape_url($string);
 
 /**
  * Escape an XML string
@@ -112,7 +111,7 @@ houdini_unescape_url($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_escape_xml($string)
+houdini_escape_xml($string);
 
 /**
  * Escape an href string
@@ -122,12 +121,12 @@ houdini_escape_xml($string)
  *
  * @throws HoudiniException If input is not valid UTF-8
  */
-houdini_escape_href($string)
+houdini_escape_href($string);
 ```
 
 ## Acknowledgements
 
-This extension simply wraps [houdini](https://github.com/vmg/houdini/). Please give all praise to its author, @vmg.
+This extension simply wraps [houdini](https://github.com/vmg/houdini/). Please give all praise to its author, [@vmg](https://twitter.com/vmg).
 
 ## License
 
