@@ -22,6 +22,7 @@
 
 #include "php.h"
 #include "ext/standard/info.h"
+#include "ext/standard/html.h"
 #include "houdini.h"
 #include "php_houdini.h"
 
