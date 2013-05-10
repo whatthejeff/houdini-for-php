@@ -27,3 +27,4 @@
 /run-tests.php
 /*.lo
 /*.la
+/autom4te.cache/
