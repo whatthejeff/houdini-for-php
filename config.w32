@@ -1,0 +1,9 @@
+// $Id$
+// vim:ft=javascript
+
+ARG_ENABLE("houdini", "enable houdini support", "no");
+
+if (PHP_HOUDINI != "no") {
+	EXTENSION("houdini", "houdini.c houdini_href_e.c houdini_html_e.c houdini_html_u.c houdini_js_e.c houdini_js_u.c houdini_uri_e.c houdini_uri_u.c houdini_xml_e.c buffer.c");
+}
+
