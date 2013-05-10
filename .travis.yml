@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - 5.2
+  - 5.3
+  - 5.4
+  - 5.5
+
+before_script:
+  - phpize && ./configure && make && sudo make install
+  - echo "extension=uv.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
+script: make test
