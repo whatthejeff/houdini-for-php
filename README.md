@@ -17,6 +17,8 @@ Houdini for PHP works with PHP 5.3 or later.
 
 ## Tests
 
+[![Build Status](https://secure.travis-ci.org/whatthejeff/houdini-for-php.png?branch=master)](https://travis-ci.org/whatthejeff/houdini-for-php)
+
     make test
 
 ## Functions
