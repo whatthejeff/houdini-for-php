@@ -94,7 +94,11 @@ const zend_function_entry houdini_functions[] = {
 
 PHP_MINIT_FUNCTION(houdini)
 {
-	php_houdini_init(TSRMLS_C);
+	zend_class_entry ce;
+
+	INIT_CLASS_ENTRY(ce, "HoudiniException", NULL);
+	houdini_ce_HoudiniException = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL  TSRMLS_CC);
+
 	return SUCCESS;
 }
 
@@ -174,24 +178,6 @@ PHP_HOUDINI_FUNCTION(houdini_escape_xml)
 /* proto string houdini_escape_href(string str)
    Escapes an HREF string */
 PHP_HOUDINI_FUNCTION(houdini_escape_href)
-
-zend_function_entry houdini_exception_methods[] = {
-	PHP_FE_END
-};
-
-#if PHP_VERSION_ID < 50200
-# define php_houdini_exception_get_default() zend_exception_get_default()
-#else
-# define php_houdini_exception_get_default() zend_exception_get_default(TSRMLS_C)
-#endif
-
-void php_houdini_init(TSRMLS_D)
-{
-	zend_class_entry ce;
-
-	INIT_CLASS_ENTRY(ce, "HoudiniException", houdini_exception_methods);
-	houdini_ce_HoudiniException = zend_register_internal_class_ex(&ce, php_houdini_exception_get_default(), NULL  TSRMLS_CC);
-}
 
 zend_module_entry houdini_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
