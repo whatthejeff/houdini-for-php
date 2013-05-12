@@ -28,45 +28,47 @@
 
 static zend_class_entry *houdini_ce_HoudiniException;
 
-#define PHP_HOUDINI_CHECK_UTF8(string, length) \
-	do { \
-		size_t position = 0; \
-		int status; \
+#define PHP_HOUDINI_CHECK_UTF8(string, length) do { \
+	size_t position = 0; \
+	int status; \
 \
-		while (position < length) { \
-			php_houdini_next_utf8_char((const unsigned char *)string, length, &position, &status); \
-			if (status != SUCCESS) { \
-				zend_throw_exception(houdini_ce_HoudiniException, "Input string must be valid UTF-8", 0 TSRMLS_CC); \
-				return; \
-			} \
-		} \
-	} while(0)
-
-#define PHP_HOUDINI_FUNCTION(function_name) \
-	do{ \
-		char *string = NULL; \
-		int length; \
-\
-		gh_buf buffer = GH_BUF_INIT; \
-\
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &string, &length) == FAILURE) { \
+	while (position < length) { \
+		php_houdini_next_utf8_char((const unsigned char *)string, length, &position, &status); \
+		if (status != SUCCESS) { \
+			zend_throw_exception(houdini_ce_HoudiniException, "Input string must be valid UTF-8", 0 TSRMLS_CC); \
 			return; \
 		} \
-\
-		if (length == 0) { \
-			RETURN_EMPTY_STRING(); \
-		} \
-\
-		PHP_HOUDINI_CHECK_UTF8(string, length); \
-\
-		if (function_name(&buffer, (const uint8_t *)string, length)) { \
-			RETVAL_STRINGL(buffer.ptr, buffer.size, 1); \
-			gh_buf_free(&buffer); \
-		} else { \
-			RETVAL_STRINGL(string, length, 1); \
-		} \
-	} while (0)
+	} \
+} while(0)
 
+#define PHP_HOUDINI_FUNCTION(function_name) do{ \
+	char *string = NULL; \
+	int length; \
+\
+	gh_buf buffer = GH_BUF_INIT; \
+\
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &string, &length) == FAILURE) { \
+		return; \
+	} \
+\
+	if (length == 0) { \
+		RETURN_EMPTY_STRING(); \
+	} \
+\
+	PHP_HOUDINI_CHECK_UTF8(string, length); \
+\
+	if (function_name(&buffer, (const uint8_t *)string, length)) { \
+		RETVAL_STRINGL(buffer.ptr, buffer.size, 1); \
+		gh_buf_free(&buffer); \
+	} else { \
+		RETVAL_STRINGL(string, length, 1); \
+	} \
+} while (0)
+
+
+/* {{{ Note: The following section of utf8-related functions/macros was imported
+   from ext/standard/html.c to provide `php_next_utf8_char()` for versions of PHP
+   that are missing it. */
 #define MB_FAILURE(pos, advance) do { \
 	*cursor = pos + (advance); \
 	*status = FAILURE; \
@@ -168,6 +170,8 @@ static inline unsigned int php_houdini_next_utf8_char(
 	*cursor = pos;
 	return this_char;
 }
+/* }}} */
+
 
 /* {{{ string houdini_escape_html(string str [, bool $secure = true ])
    Escapes an HTML string */
@@ -200,7 +204,7 @@ PHP_FUNCTION(houdini_escape_html)
 
 /* {{{ proto string houdini_unescape_html(string str)
    Unescapes an HTML string */
-PHP_FUNCTION(houdini_unescape_html) \
+PHP_FUNCTION(houdini_unescape_html)
 {
 	PHP_HOUDINI_FUNCTION(houdini_unescape_html);
 }
@@ -208,7 +212,7 @@ PHP_FUNCTION(houdini_unescape_html) \
 
 /* {{{ proto string houdini_escape_js(string str)
    Escapes a JavaScript string */
-PHP_FUNCTION(houdini_escape_js) \
+PHP_FUNCTION(houdini_escape_js)
 {
 	PHP_HOUDINI_FUNCTION(houdini_escape_js);
 }
@@ -216,7 +220,7 @@ PHP_FUNCTION(houdini_escape_js) \
 
 /* {{{ proto string houdini_unescape_js(string str)
    Unescapes a JavaScript string */
-PHP_FUNCTION(houdini_unescape_js) \
+PHP_FUNCTION(houdini_unescape_js)
 {
 	PHP_HOUDINI_FUNCTION(houdini_unescape_js);
 }
@@ -224,7 +228,7 @@ PHP_FUNCTION(houdini_unescape_js) \
 
 /* {{{ proto string houdini_escape_uri(string str)
    Escapes a URI string */
-PHP_FUNCTION(houdini_escape_uri) \
+PHP_FUNCTION(houdini_escape_uri)
 {
 	PHP_HOUDINI_FUNCTION(houdini_escape_uri);
 }
@@ -232,7 +236,7 @@ PHP_FUNCTION(houdini_escape_uri) \
 
 /* {{{ proto string houdini_unescape_uri(string str)
    Unescapes a URI string */
-PHP_FUNCTION(houdini_unescape_uri) \
+PHP_FUNCTION(houdini_unescape_uri)
 {
 	PHP_HOUDINI_FUNCTION(houdini_unescape_uri);
 }
@@ -240,7 +244,7 @@ PHP_FUNCTION(houdini_unescape_uri) \
 
 /* {{{ proto string houdini_escape_url(string str)
    Escapes a URL string */
-PHP_FUNCTION(houdini_escape_url) \
+PHP_FUNCTION(houdini_escape_url)
 {
 	PHP_HOUDINI_FUNCTION(houdini_escape_url);
 }
@@ -248,7 +252,7 @@ PHP_FUNCTION(houdini_escape_url) \
 
 /* {{{ proto string houdini_unescape_url(string str)
    Unescapes a URL string */
-PHP_FUNCTION(houdini_unescape_url) \
+PHP_FUNCTION(houdini_unescape_url)
 {
 	PHP_HOUDINI_FUNCTION(houdini_unescape_url);
 }
@@ -256,7 +260,7 @@ PHP_FUNCTION(houdini_unescape_url) \
 
 /* {{{ proto string houdini_escape_xml(string str)
    Escapes an XML string */
-PHP_FUNCTION(houdini_escape_xml) \
+PHP_FUNCTION(houdini_escape_xml)
 {
 	PHP_HOUDINI_FUNCTION(houdini_escape_xml);
 }
@@ -264,7 +268,7 @@ PHP_FUNCTION(houdini_escape_xml) \
 
 /* {{{ proto string houdini_escape_href(string str)
    Escapes an HREF string */
-PHP_FUNCTION(houdini_escape_href) \
+PHP_FUNCTION(houdini_escape_href)
 {
 	PHP_HOUDINI_FUNCTION(houdini_escape_href);
 }
