@@ -20,10 +20,6 @@
 #include "config.h"
 #endif
 
-#include "php.h"
-#include "ext/standard/info.h"
-#include "zend_exceptions.h"
-#include "houdini.h"
 #include "php_houdini.h"
 
 static zend_class_entry *houdini_ce_HoudiniException;

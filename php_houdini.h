@@ -22,6 +22,11 @@
 #define PHP_HOUDINI_EXT_NAME "houdini"
 #define PHP_HOUDINI_EXT_VERSION "1.0.0"
 
+#include "php.h"
+#include "ext/standard/info.h"
+#include "zend_exceptions.h"
+#include "houdini/houdini.h"
+
 extern zend_module_entry houdini_module_entry;
 #define phpext_houdini_ptr &houdini_module_entry
 
