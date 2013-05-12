@@ -1,7 +1,7 @@
 --TEST--
 Test fails for invalid utf8
 --SKIPIF--
-<?php if (!extension_loaded('houdini')) print 'skip'; ?>
+<?php if (!extension_loaded('houdini')) print 'skip: houdini extension is not loaded'; ?>
 --FILE--
 <?php
 
@@ -19,22 +19,26 @@ $fixtures = array(
 );
 
 foreach($fixtures as $fixture) {
+    printf('%s: ', $fixture);
+
     try {
         call_user_func($fixture, "\xEA");
     } catch(HoudiniException $e) {
-        var_dump('Input string must be valid UTF-8' === $e->getMessage());
+        print $e->getMessage();
     }
+
+    print "\n";
 }
 
 ?>
 --EXPECT--
-bool(true)
-bool(true)
-bool(true)
-bool(true)
-bool(true)
-bool(true)
-bool(true)
-bool(true)
-bool(true)
-bool(true)
+houdini_escape_html: Input string must be valid UTF-8
+houdini_unescape_html: Input string must be valid UTF-8
+houdini_escape_xml: Input string must be valid UTF-8
+houdini_escape_uri: Input string must be valid UTF-8
+houdini_escape_url: Input string must be valid UTF-8
+houdini_escape_href: Input string must be valid UTF-8
+houdini_unescape_uri: Input string must be valid UTF-8
+houdini_unescape_url: Input string must be valid UTF-8
+houdini_escape_js: Input string must be valid UTF-8
+houdini_unescape_js: Input string must be valid UTF-8
