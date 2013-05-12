@@ -6,7 +6,7 @@ But that kind of breaks the joke in the name so nevermind.
 
 ## Requirements
 
-Houdini for PHP works with PHP 5.3 or later.
+Houdini for PHP works with PHP 5.2 or later.
 
 ## Installation
 
