@@ -44,7 +44,7 @@ foreach($multibyte_fixtures as $fixture) {
 
 ?>
 --EXPECT--
-'http://www.homerun.com'
+'http://www.homerun.com/'
 'http://www.homerun.com/'
 '%'
 'http%'
